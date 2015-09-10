@@ -1,12 +1,12 @@
 ---
 - name: Rules for Ubuntu
   include: Ubuntu.yml
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution in ['Ubuntu']
   tags: ["packages", "packaging"]
 
 - name: Rules for Debian OS family
   include: Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family in ['Debian', 'Linuxmint']
   tags: ["packages", "packaging"]
 
 - name: Rules for RedHat OS family
