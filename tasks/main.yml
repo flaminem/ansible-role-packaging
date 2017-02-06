@@ -1,15 +1,25 @@
 ---
 - name: Rules for Ubuntu
   include: Ubuntu.yml
-  when: ansible_distribution in ['Ubuntu']
+  static: no
+  when: ansible_lsb.id in ['Ubuntu']
   tags: ["packages", "packaging"]
 
 - name: Rules for Debian OS family
   include: Debian.yml
-  when: ansible_os_family in ['Debian', 'Linuxmint']
+  static: no
+  when: ansible_lsb.id in ['Debian']
   tags: ["packages", "packaging"]
 
 - name: Rules for RedHat OS family
   include: RedHat.yml
+  static: no
   when: ansible_os_family == 'RedHat'
   tags: ["packages", "packaging"]
+
+- name: Rules for LinuxMint
+  include: LinuxMint-{{ansible_distribution_major_version}}.yml
+  static: no
+  when: ansible_lsb.id in ['LinuxMint']
+  tags: ["packages", "packaging"]
+
